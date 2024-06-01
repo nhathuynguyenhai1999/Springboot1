@@ -3,12 +3,16 @@ package cg.codegym.minitest.springboot2.Model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Setter
 @Getter
 @Entity
+@Data
 @Table(name = "computer")
 public class Computer {
     @Id
@@ -28,5 +32,6 @@ public class Computer {
 
     public Computer() {
     }
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Type> types;
 }

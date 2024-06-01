@@ -3,12 +3,14 @@ package cg.codegym.minitest.springboot2.Model;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 @Entity
+@Data
 @Table(name = "type")
 public class Type {
     @Id
