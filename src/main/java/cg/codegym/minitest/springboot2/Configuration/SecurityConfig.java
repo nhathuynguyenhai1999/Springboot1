@@ -4,6 +4,7 @@ import cg.codegym.minitest.springboot2.Service.iml.ComputerService1;
 import cg.codegym.minitest.springboot2.Configuration.CustomAccessDeniedHandler;
 import cg.codegym.minitest.springboot2.Configuration.JwtAuthenticationTokenFilter;
 import cg.codegym.minitest.springboot2.Configuration.RestAuthenticationEntryPoint;
+import cg.codegym.minitest.springboot2.Service.iml.ComputerService2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
     @Autowired
-    private ComputerService1 computerService1;
+    private ComputerService2 computerService1;
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationTokenFilter();
@@ -70,7 +71,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                                .requestMatchers("/api/auth/login**").permitAll()
+                                .requestMatchers("/api/auth/login/**").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/api/customers**").authenticated()
 //                        .requestMatchers("/api/customers**").hasAnyAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.PUT,"/api/customers**").hasAnyAuthority("ROLE_ADMIN")

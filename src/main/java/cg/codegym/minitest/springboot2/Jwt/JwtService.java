@@ -17,7 +17,7 @@ public class JwtService {
     private static final long EXPIRE_TIME = 86400000L;
 
     public String generateTokenLogin(Authentication authentication) {
-        ComputerPrinciple userPrincipal = (ComputerPrinciple) authentication.getPrincipal();
+        ComputerUserPrinciple userPrincipal = (ComputerUserPrinciple) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))

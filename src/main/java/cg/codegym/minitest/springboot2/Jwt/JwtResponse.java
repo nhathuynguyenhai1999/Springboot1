@@ -12,16 +12,16 @@ public class JwtResponse {
     private Long id;
     private String name;
     private String type = "Bearer";
-    private String code;
+    private String username;
     private final Collection<? extends GrantedAuthority> authorities;
     public JwtResponse(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
-    public JwtResponse(Collection<? extends GrantedAuthority> authorities, Long id, String name, String type, String code) {
+    public JwtResponse(Collection<? extends GrantedAuthority> authorities, Long id, String name, String type, String username) {
         this.authorities = authorities;
         this.id = id;
         this.name = name;
         this.type = type;
-        this.code = code;
+        this.username = username;
     }
 }
