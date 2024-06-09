@@ -34,6 +34,6 @@ public class AuthController {
         String jwt = jwtService.generateTokenLogin(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Computer currentUser = computerService1.findByName(user.getName());
-        return ResponseEntity.ok(new JwtResponse(userDetails.getAuthorities(), currentUser.getId(), jwt, userDetails.getUsername(), userDetails.getUsername()));
+        return ResponseEntity.ok(new JwtResponse(userDetails.getAuthorities(), currentUser.getId(), jwt, userDetails.username(), userDetails.username()));
     }
 }

@@ -20,7 +20,7 @@ public class JwtService {
         ComputerUserPrinciple userPrincipal = (ComputerUserPrinciple) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject((userPrincipal.getUsername()))
+                .setSubject((userPrincipal.username()))
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date((new Date()).getTime() + EXPIRE_TIME))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
