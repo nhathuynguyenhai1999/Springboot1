@@ -12,6 +12,9 @@
     </a>
 </p>
 <p>
+    <a href="/shopping-cart">Cart</a>
+</p>
+<p>
     <a th:href="@{/types}">
         Types
     </a>
@@ -37,6 +40,7 @@
         <th>Type</th>
         <th>Update</th>
         <th>Delete</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -47,6 +51,7 @@
         <td th:text="${c.getType().getName()}"></td>
         <td><a th:href="@{/computers/update/{id}(id=${c.getId()})}">update</a></td>
         <td><a th:href="@{/computers/delete/{id}(id=${c.getId()})}">delete</a></td>
+        <td><a th:href="@{/add/__${c.id}__(action='list')}">Add To Cart</a></td>
     </tr>
     </tbody>
 </table>

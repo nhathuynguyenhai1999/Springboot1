@@ -1,6 +1,7 @@
 package cg.codegym.minitest.springboot2.Controller;
 
 import cg.codegym.minitest.springboot2.Exception.DuplicateProductCodeException;
+import cg.codegym.minitest.springboot2.Model.Cart;
 import cg.codegym.minitest.springboot2.Model.Computer;
 import cg.codegym.minitest.springboot2.Model.Type;
 import cg.codegym.minitest.springboot2.Service.iml.ComputerService;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/computers")
@@ -28,6 +30,16 @@ public class ComputerController {
 
     @Autowired
     private ITypeService typeService;
+
+
+
+    @ModelAttribute("cart")
+    public Cart setupCart(){
+        return new Cart();
+    }
+
+
+    private static final Logger logger = Logger.getLogger(ComputerController.class.getName());
 
     public ComputerController(ComputerService computerService) {
         this.computerService = computerService;
@@ -148,5 +160,21 @@ public class ComputerController {
     @ExceptionHandler(DuplicateProductCodeException.class)
     public ModelAndView showInputNotAcceptable() {
         return new ModelAndView("/duplicate-code");
+    }
+
+    @GetMapping("/add/{id}")
+    public String addToCart(@PathVariable Long id,
+                            @ModelAttribute Cart cart,
+                            @RequestParam("action") String action) throws Exception {
+        Optional<Computer> productOptional = computerService.findById(id);
+        if (productOptional.isEmpty()) {
+            return "/error_404";
+        }
+        if (action.equals("show")) {
+            cart.addComputer(productOptional.get());
+            return "redirect:/cart";
+        }
+        cart.addComputer(productOptional.get());
+        return "redirect:/computers";
     }
 }
